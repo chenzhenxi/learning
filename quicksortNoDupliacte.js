@@ -8,16 +8,10 @@ function quicksortNoDupliacte(array, lo = 0, hi = array.length - 1) {
     while(lo < j && array[--j] > array[lo]) {}
     
     if (i < j) {
-      let tmp = array[i];
-      array[i] = array[j];
-      array[j] = tmp;
+      [array[i], array[j]] = [array[j], array[i]];
     }
   }
-  
-  let tmp = array[lo];
-  array[lo] = array[j];
-  array[j] = tmp;
-  
+  [array[lo], array[j]] = [array[j], array[lo]];  
   quicksortNoDupliacte(array, lo, j - 1);
   quicksortNoDupliacte(array, j + 1, hi);
   

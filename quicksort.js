@@ -6,8 +6,9 @@ function quicksort(array, lo = 0, hi = array.length - 1) {
   
   while (i <= j) {
     if (array[i] < array[p]) {
-      [array[p], array[i]] = [array[i], array[p]];  
-      p = i++;
+      [array[p], array[i]] = [array[i], array[p]];
+      p++;
+      i++;
     } else if (array[i] === array[p]) {
       i++;
     } else if (array[j] > array[p]) {

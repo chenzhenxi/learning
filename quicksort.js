@@ -1,24 +1,25 @@
 function quicksort(array, lo = 0, hi = array.length - 1) {
   if (lo >= hi) return array;
     
-  let p = lo, i = lo, j = hi + 1;
-  shuffle(array, lo, j);
+  let p = lo, i = lo, j = hi;
+  shuffle(array, lo, j + 1);
   
-  while (true) {
-    while(i < hi && array[++i] <= array[p]) {
-      if (array[i] !== array[p]) {
-        [array[p], array[i]] = [array[i], array[p]];  
-      }
+  while (i <= j) {
+    if (array[i] < array[p]) {
+      [array[p], array[i]] = [array[i], array[p]];  
+      p = i++;
+    } else if (array[i] === array[p]) {
+      i++;
+    } else if (array[j] > array[p]) {
+      j--;
+    } else {
+      [array[i], array[j]] = [array[j], array[i]];
+      j--;
     }
-    while(lo < j && array[--j] > array[p]) {}
-    if (i >= j) {
-      break;
-    }
-    [array[i], array[j]] = [array[j], array[i]];
   }
   
-  quicksort(array, lo, j - 1);
-  quicksort(array, j + 1, hi);
+  quicksort(array, lo, p - 1);
+  quicksort(array, i, hi);
   
   return array;
 }

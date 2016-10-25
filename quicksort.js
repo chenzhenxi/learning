@@ -1,4 +1,30 @@
-function quicksortNoDupliacte(array, lo = 0, hi = array.length - 1) {
+function quicksort(array, lo = 0, hi = array.length - 1) {
+  if (lo >= hi) return array;
+    
+  let p = lo, i = lo, j = hi + 1;
+  shuffle(array, lo, j);
+  
+  while (true) {
+    while(i < hi && array[++i] <= array[p]) {
+      if (array[i] !== array[p]) {
+        [array[p], array[i]] = [array[i], array[p]];  
+      }
+    }
+    while(lo < j && array[--j] > array[p]) {}
+    if (i >= j) {
+      break;
+    }
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  
+  quicksort(array, lo, j - 1);
+  quicksort(array, j + 1, hi);
+  
+  return array;
+}
+
+
+function naiveQuicksortNoDupliacte(array, lo = 0, hi = array.length - 1) {
   if (lo >= hi) return array;
     
   let i = lo, j = hi + 1;

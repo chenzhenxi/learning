@@ -11,8 +11,6 @@ function quicksort(array, lo = 0, hi = array.length - 1) {
       i++;
     } else if (array[i] === array[p]) {
       i++;
-    } else if (array[j] > array[p]) {
-      j--;
     } else {
       [array[i], array[j]] = [array[j], array[i]];
       j--;

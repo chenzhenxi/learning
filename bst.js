@@ -41,5 +41,40 @@ BST.prototype.get = function(key) {
   return null;
 };
 
+BST.prototype.max = function () {
+  let next = this.root;
+  while (next && next.right) {
+    next = next.right;
+  }
+  return next;
+}
+
+BST.prototype.min = function () {
+  let next = this.root;
+  while (next && next.left) {
+    next = next.left;
+  }
+  return next && next.key;
+}
+
+BST.prototype.floor = function (key) {
+  let next = this.root;
+  let r = null;
+  while (next) {
+    if (next.key === key) {
+      return next.key;
+    } else (next.key > key) {
+      next = next.left;
+    } else {
+      r = next;
+      next = next.right;
+    }
+  }
+  return r && r.key;
+}
+
+BST.prototype.ceiling = function (key) {
+}
+
 BST.prototype.delete = function(key) {
 }

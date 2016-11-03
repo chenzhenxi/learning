@@ -3,7 +3,10 @@ function Node ({ key, val = null, left = null, right = null }) {
   this.val = val;
   this.left = left;
   this.right = right;
+  this.count = 1;
 }
+
+Node.count = node => node ? node.count : 0;
 
 function BST() {
   this.root = null;
@@ -24,6 +27,7 @@ BST.prototype.__put = function(node, key, val) {
   } else {
     node.right = this.__put(node.right, key, val);
   }
+  node.count = Node.count(node.left) + Node.count(node.right.count);
   return node;
 };
 
@@ -74,7 +78,34 @@ BST.prototype.floor = function (key) {
 }
 
 BST.prototype.ceiling = function (key) {
+  let next = this.root;
+  let r = null;
+  while (next) {
+    if (next.key === key) {
+      return next.key;
+    } else (next.key < key) {
+      next = next.right;
+    } else {
+      r = next;
+      next = next.left;
+    }
+  }
+  return r && r.key;
+}
+
+
+BST.prototype.rank = function(key) {
+  return this.__rank(this.root, key);
+}
+
+
+BST.prototype.__rank = function(node, key) {
+  if (node === null) return null;
+  if      (node.key > key)    return this.__rank(node.left, key);
+  else if (node.key < key)    return 1 + Node.count(node.left) + this.__rank(node.right, key);
+  else                        return Node.count(node.left);
 }
 
 BST.prototype.delete = function(key) {
 }
+
